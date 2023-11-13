@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for verify-spotdundancy on 2023-11-13T13:29:08-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "verify-spotdundancy"
+primary_region = "den"
+
+[build]
+
+[env]
+  PORT = "8080"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [services.concurrency]
+    type = "requests"
+    hard_limit = 25
+    soft_limit = 20
+
+  [services.resources]
+    cpu = "250m"
+    memory = "512Mi"
+    storage = "1Gi"
